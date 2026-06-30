@@ -21,6 +21,9 @@ Data that can be acquired from Clarius scanners includes:
   knowledge on how depth, preset, and probe drive transmit frequency, sampling, and gain
 - [Low-Level Parameters](docs/low-level-parameters.md) — the research parameters
   accessible through the Cast and Solum APIs
+- [QUS Reproducibility — L15HD3 and C3HD3](docs/qus-reproducibility.md) — what the
+  released Research preset pins, what varies with depth or FOV, and how to lock RF
+  acquisition for quantitative ultrasound studies (with a Python / Cast API example)
 
 ## Repository layout
 
