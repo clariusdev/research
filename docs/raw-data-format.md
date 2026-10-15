@@ -82,12 +82,12 @@ uint32 sampleSizeInBytes
 decide how to parse a file from `sampleSizeInBytes` (1 = envelope, 2 = RF, 4 = IQ) and
 the file name rather than `id`:
 
-| Type | Up to 12.x | 13.0 | 13.1 |
-|------|-----------|------|------|
-| IQ | 0 | 0 | 0 |
-| Envelope | 1 | 1 | 1 |
-| RF | 2 | 3 | 4 |
-| Per-channel RF | | 4 | 5 |
+| Type | Up to 12.x | 13.1 |
+|------|-----------|------|
+| IQ | 0 | 0 |
+| Envelope | 1 | 1 |
+| RF | 2 | 4 |
+| Per-channel RF | | 5 |
 
 Each timestamp is a little-endian `uint64` in nanoseconds:
 
