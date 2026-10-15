@@ -199,18 +199,12 @@ cast.userFunction(pyclariuscast.UserFunction.AutoGain, 0)  # confirm auto-gain o
 cast.userFunction(pyclariuscast.UserFunction.Freeze, 0)
 time.sleep(0.5)
 
-# 5. List buffered timestamps, then request the package as an LZO tarball.
-def on_avail(res, b_timestamps, iqrf_timestamps):
-    print(f"avail rf/iq frames: {len(iqrf_timestamps)}")
-
-def on_req(res, extension):
-    print(f"raw request size: {res} bytes, ext={extension}")
-    buf = bytearray(res)
-    def on_read(n): print(f"read {n} bytes")
-    cast.readRawData(buf, on_read)
-
-cast.rawDataAvailability(on_avail)
-cast.requestRawData(0, 0, 1, on_req)  # 0,0 = all buffered; lzo=1
+# 5. Request everything buffered (0, 0), compressed, then download it.
+#    From 13.1 the package is a .zip (Zstandard); earlier releases return an LZO .tar.
+size = cast.requestRawData(0, 0, 1)
+if size > 0:
+    with open("raw_data.zip", "wb") as f:
+        f.write(cast.readRawData())
 
 # 6. Disconnect cleanly when done.
 cast.disconnect()
@@ -233,7 +227,7 @@ A full working example is in the Cast release package under `examples/python/pyc
 2. **No user-locked preset at the App level.** You configure the Research preset + manual overrides each session. *Coming in the next release: a dedicated Research preset with stronger out-of-the-box locking for QUS.*
 3. **Sampling rate must vary with depth.** This is a hardware constraint — the on-probe buffer has a fixed capacity, and deeper depths require more decimation. The Research preset minimises the surface (single boundary at 20 cm for C3, 6 cm for L15) but cannot eliminate it. The exact value applied is always in the `.yml`.
 4. **AutoFocus toggle and TGC curve setting** are App-side configurations; the Cast API can disable AutoGain via `userFunction(AutoGain)` but does not have a `castSetTgc` analogue. Set TGC sliders in the App.
-5. **Pre-/post-beamformed RF** — the Clarius FPGA performs delay-and-sum on-probe, so the RF you receive is 16-bit *beamformed scanlines*, not raw per-channel data. Raw per-channel access is on a longer-term roadmap.
+5. **Pre-/post-beamformed RF** — the Clarius FPGA performs delay-and-sum on-probe, so the RF you receive is 16-bit *beamformed scanlines*, not raw per-channel data. Per-channel RF is available through [Texo](https://github.com/clariusdev/texo)'s Channels Sequence on HD3.
 6. **Beamforming mode** is fixed in the FPGA (delay-and-sum) and not configurable.
 
 ---

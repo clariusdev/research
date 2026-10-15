@@ -4,28 +4,51 @@ How Clarius raw data is packaged on disk, the binary layout of each `.raw` file,
 metadata that accompanies it, and how to read it in Python or MATLAB. For how to *capture*
 the data, see [in-app-tools.md](in-app-tools.md).
 
-Clarius scanners can produce three kinds of raw data:
+Clarius scanners produce three main kinds of raw data:
 
 - **RF** — raw radiofrequency, 16-bit beamformed samples
 - **IQ** — quadrature data, interleaved 16-bit I and Q
 - **Envelope** — B-mode grayscale, 8-bit, pre-scan-converted (ultrasound coordinates)
 
+From 13.1, [Texo](https://github.com/clariusdev/texo) can also store per-channel RF,
+M mode, PW, and contrast data in the same format.
+
 ## Package layout
 
-Accessed data arrives as a `.tar` package; each raw stream inside is LZO-compressed
-(`.lzo`). Decompress with any LZO tool before reading. After extraction:
+### 13.1 and later
+
+Raw data arrives as a `.zip` package. By default its entries are compressed with
+Zstandard (zip method 93), which many unzip tools can't extract. Python 3.14 and later
+reads them with the standard `zipfile` module:
+
+```python
+import zipfile
+zipfile.ZipFile("raw_data.zip").extractall("raw_data")
+```
+
+The Cast and Solum APIs can request the package uncompressed instead (`compress` set to
+`0`, or `RawCompressionNone`), which any zip tool opens.
 
 ```
-raw_data.tar
-├── <timestamp>_env.raw[.lzo]   envelope / B grayscale
-├── <timestamp>_env.yml         envelope metadata
-├── <timestamp>_env.tgc.yml     per-frame TGC (present if auto gain was used)
-├── <timestamp>_iq.raw[.lzo]    IQ (Doppler data when color/power mode is on)
-├── <timestamp>_iq.yml          IQ metadata
-├── <timestamp>_rf.raw[.lzo]    RF (RF mode only)
-├── <timestamp>_rf.yml          RF metadata
-└── <timestamp>_rf.tgc.yml      per-frame TGC for RF (if auto gain was used)
+raw_data.zip
+├── <timestamp>_env.raw       envelope / B grayscale
+├── <timestamp>_env.yml       envelope metadata
+├── <timestamp>_env.tgc.yml   per-frame TGC (present if auto gain was used)
+├── <timestamp>_iq.raw        IQ (Doppler data when color/power mode is on)
+├── <timestamp>_iq.yml        IQ metadata
+├── <timestamp>_rf.raw        RF (RF mode only)
+├── <timestamp>_rf.yml        RF metadata
+└── <timestamp>_rf.tgc.yml    per-frame TGC for RF (if auto gain was used)
 ```
+
+`<timestamp>` is the probe's local time, e.g. `2026-10-15T14-03-22+0000`. Texo
+captures can also hold `_ch` (per-channel RF), `_env_sc`, `_env_m`, `_pw`, `_cfi`, `_ce`,
+and `_imu.yml` files.
+
+### Before 13.1
+
+Raw data arrives as a `.tar` package; each raw stream inside is LZO-compressed
+(`.raw.lzo`). Decompress with any LZO tool before reading. The file names are the same.
 
 In a grayscale/Doppler capture you get `env` + `iq`; in RF mode you get `env` + `rf`.
 
@@ -54,6 +77,17 @@ uint32 numScanLines
 uint32 numSamplesPerLine
 uint32 sampleSizeInBytes
 ```
+
+`id` is the data type, but its numbering has changed between releases, so readers should
+decide how to parse a file from `sampleSizeInBytes` (1 = envelope, 2 = RF, 4 = IQ) and
+the file name rather than `id`:
+
+| Type | Up to 12.x | 13.0 | 13.1 |
+|------|-----------|------|------|
+| IQ | 0 | 0 | 0 |
+| Envelope | 1 | 1 | 1 |
+| RF | 2 | 3 | 4 |
+| Per-channel RF | | 4 | 5 |
 
 Each timestamp is a little-endian `uint64` in nanoseconds:
 
@@ -86,7 +120,9 @@ RF sampling adapts to depth so the data can be captured, buffered, and transferr
 
 ## `.yml` metadata
 
-Each `.raw` has a sibling `.yml` describing acquisition. Example (RF):
+Each `.raw` has a sibling `.yml` describing acquisition. From 13.1 it starts with
+`software version`, `iso time/date`, and a `probe:` block (`elements`, `pitch` in µm,
+`radius` in mm for curved probes). Example (RF):
 
 ```yaml
 frames: 13
@@ -141,7 +177,8 @@ This repo ships reference readers and runnable examples:
 
 - [`common/python/rdataread.py`](../common/python/rdataread.py) — `read_rf`, `read_iq`,
   `read_env`
-- [`common/matlab/rdataread.m`](../common/matlab/rdataread.m) — MATLAB equivalents
+- [`common/matlab/rdataread.m`](../common/matlab/rdataread.m) — MATLAB equivalent,
+  which picks the format from the header's sample size
 - [`viewer/python/runme.py`](../viewer/python/runme.py),
   [`viewer/matlab/runme.m`](../viewer/matlab/runme.m),
   [`viewer/jupyter/runme.ipynb`](../viewer/jupyter/runme.ipynb) — load and display the

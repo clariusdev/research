@@ -44,8 +44,9 @@ RF streaming is enabled by default when RF mode is engaged, and is toggled with 
 Once imaging is **frozen** with raw-data capture engaged, the capture-image or
 capture-cine buttons automatically download the data from the scanner.
 
-- Data is always packaged as a `.tar` using LZO compression internally. Ensure your OS
-  has the right tools to decompress it (see [raw-data-format.md](raw-data-format.md)).
+- From 13.1, data is packaged as a `.zip` with Zstandard compression; earlier releases
+  use a `.tar` with LZO compression. Ensure you have the right tools to extract it (see
+  [raw-data-format.md](raw-data-format.md#package-layout)).
 - Downloads over the wireless link take time: ~1–3 s for a single frame; up to a minute
   for cines of hundreds of frames. Wait for the on-screen progress to complete before
   imaging again.
@@ -59,7 +60,7 @@ capture-cine buttons automatically download the data from the scanner.
 
 Once an exam is completed and submitted, raw data can be accessed via:
 
-- **Clarius Cloud** — view the exam online and download the packaged `.tar` directly from
+- **Clarius Cloud** — view the exam online and download the raw data package directly from
   a browser.
 
   ![Raw Data Download](../blob/raw_cloud.png)

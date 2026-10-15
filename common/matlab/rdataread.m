@@ -39,48 +39,35 @@ if frames > header.frames
 end
 
 % disp(header);
-if (header.id == 3)% pw iq
+% header.id numbering differs between releases, so the sample size decides the format
+if header.sampleSize == 4 % iq: interleaved int16 I and Q
     ts = zeros(1,frames);
-    data = zeros(frames, header.samples*2, header.lines);    
-    % read data
+    data = zeros(frames, header.samples*2, header.lines);
     for f = 1: frames
         % read time stamp
-        ts(f) = fread(fid, 1,'int64'); 
-        % read one line
+        ts(f) = fread(fid, 1,'int64');
+        % read one frame
         oneline = fread(fid, [header.samples * 2, header.lines],'int16');
         data(f,:,:) = oneline;
     end
-elseif (header.id == 0) % iq
-    ts = zeros(1,frames);
-    data = zeros(frames, header.samples*2, header.lines);    
-    % read ENV data
-    for f = 1: frames
-        % read time stamp
-        ts(f) = fread(fid, 1,'int64'); 
-        % read one line
-        oneline = fread(fid, [header.samples * 2, header.lines],'int16');
-        data(f,:,:) = oneline;
-    end
-elseif (header.id == 1) % env
+elseif header.sampleSize == 1 % env
     ts = zeros(1,frames);
     data = zeros(frames,header.samples, header.lines);
-    % read ENV data
     for f = 1: frames
         % read time stamp
-        ts(f) = fread(fid, 1,'int64'); 
-        % read one line
+        ts(f) = fread(fid, 1,'int64');
+        % read one frame
         oneline = fread(fid, [header.samples, header.lines],'uint8');
         data(f,:,:) = oneline;
     end
-elseif header.id == 2
-    % read rf data
+elseif header.sampleSize == 2 % rf or per-channel rf
     nsamples = header.samples;
     nlines = header.lines;
     ts = zeros(1,frames);
     data = zeros(frames, nsamples, nlines);
     for f = 1:frames
         % read the time stamp
-        ts(f) = fread(fid, 1,'int64'); 
+        ts(f) = fread(fid, 1,'int64');
         % read the frame
         data(f, :, :) = fread(fid, [nsamples, nlines],'int16');
     end
