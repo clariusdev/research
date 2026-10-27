@@ -236,7 +236,7 @@ A full working example is in the Cast release package under `examples/python/pyc
 
 (Roadmap items Kris confirmed during the call, in active development; specific timing tied to App store approval cycle.)
 
-- **Dedicated fixed Research preset** with stronger parameter locking out of the box, intended for QUS workflows.
+- **Dedicated fixed Research preset** with stronger parameter locking out of the box, intended for QUS workflows. *Shipped in 13.1 as the [QUS preset](qus-preset.md).*
 - **Cast API parameter read-back**, so your acquisition script can confirm at runtime that the values you wrote actually took effect, without waiting for the `.yml` after a capture.
 - **B-mode TGC on / RF TGC off** capture mode (a separate research request) — independent of these QUS changes but relevant if you want truly TGC-free RF in future work.
 
