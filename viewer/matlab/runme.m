@@ -14,10 +14,10 @@ clc
 addpath('../../common/matlab');
 
 % set data path
-path = '../data/wirephantom/';
+path = '../../data/convex/';
 
 %% read rf data 
-filenameRF = 'phantom_rf.raw';
+filenameRF = 'convex_rf.raw';
 
 numFrames = 50;
 [dataRF, header] = rdataread([path, filenameRF], numFrames);
@@ -37,7 +37,7 @@ for i = 1:numFrames
 end
 
 %% read iq data 
-filenameIQ = 'phantom_iq.raw';
+filenameIQ = 'convex_iq.raw';
 
 numFrames = 50;
 [dataIQ, header] = rdataread([path, filenameIQ], numFrames);
@@ -64,7 +64,7 @@ for i = 1:numFrames
 end
 
 %% read b or envelope pre scanconversion data 
-filenameB = 'phantom_env.raw';
+filenameB = 'convex_env.raw';
 
 numFrames = 50;
 [dataB, header] = rdataread([path, filenameB], numFrames);

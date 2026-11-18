@@ -1,0 +1,233 @@
+# raw data parameters
+
+iso time/date: 2026-11-18T22-07-37+0000
+probe:
+  version: v3
+  elements: 192
+  pitch: 300.00
+  radius: 45.00
+  element width: 260.00
+  lens thickness: 0.00
+frames: 1
+frame rate: 17.17 Hz
+transmit frequency: 3.54 MHz
+transmit pulse: +-
+imaging depth: 150.00 mm
+focal depth: 75.00 mm
+auto gain: off
+mla: 4
+tgc: 
+  - { 0.00mm, 0.00dB }
+  - { 80.00mm, 30.00dB }
+size: {samples per line: 1952,number of lines: 192,sample size: 4 bytes}
+type: IQ
+compression: none
+sampling rate: 10 MHz
+delay samples: 0
+lines:
+  - {rx element: 0,tx element: 1.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 1,tx element: 1.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 2,tx element: 2.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 3,tx element: 2.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 4,tx element: 4.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 5,tx element: 4.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 6,tx element: 6.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 7,tx element: 6.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 8,tx element: 8.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 9,tx element: 8.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 10,tx element: 10.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 11,tx element: 10.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 12,tx element: 12.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 13,tx element: 12.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 14,tx element: 14.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 15,tx element: 14.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 16,tx element: 16.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 17,tx element: 16.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 18,tx element: 18.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 19,tx element: 18.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 20,tx element: 20.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 21,tx element: 20.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 22,tx element: 22.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 23,tx element: 22.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 24,tx element: 24.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 25,tx element: 24.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 26,tx element: 26.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 27,tx element: 26.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 28,tx element: 28.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 29,tx element: 28.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 30,tx element: 30.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 31,tx element: 30.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 32,tx element: 32.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 33,tx element: 32.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 34,tx element: 34.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 35,tx element: 34.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 36,tx element: 36.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 37,tx element: 36.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 38,tx element: 38.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 39,tx element: 38.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 40,tx element: 40.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 41,tx element: 40.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 42,tx element: 42.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 43,tx element: 42.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 44,tx element: 44.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 45,tx element: 44.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 46,tx element: 46.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 47,tx element: 46.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 48,tx element: 48.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 49,tx element: 48.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 50,tx element: 50.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 51,tx element: 50.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 52,tx element: 52.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 53,tx element: 52.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 54,tx element: 54.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 55,tx element: 54.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 56,tx element: 56.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 57,tx element: 56.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 58,tx element: 58.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 59,tx element: 58.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 60,tx element: 60.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 61,tx element: 60.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 62,tx element: 62.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 63,tx element: 62.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 64,tx element: 64.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 65,tx element: 64.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 66,tx element: 66.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 67,tx element: 66.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 68,tx element: 68.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 69,tx element: 68.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 70,tx element: 70.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 71,tx element: 70.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 72,tx element: 72.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 73,tx element: 72.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 74,tx element: 74.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 75,tx element: 74.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 76,tx element: 76.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 77,tx element: 76.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 78,tx element: 78.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 79,tx element: 78.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 80,tx element: 80.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 81,tx element: 80.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 82,tx element: 82.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 83,tx element: 82.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 84,tx element: 84.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 85,tx element: 84.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 86,tx element: 86.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 87,tx element: 86.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 88,tx element: 88.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 89,tx element: 88.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 90,tx element: 90.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 91,tx element: 90.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 92,tx element: 92.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 93,tx element: 92.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 94,tx element: 94.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 95,tx element: 94.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 96,tx element: 96.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 97,tx element: 96.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 98,tx element: 98.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 99,tx element: 98.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 100,tx element: 100.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 101,tx element: 100.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 102,tx element: 102.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 103,tx element: 102.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 104,tx element: 104.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 105,tx element: 104.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 106,tx element: 106.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 107,tx element: 106.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 108,tx element: 108.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 109,tx element: 108.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 110,tx element: 110.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 111,tx element: 110.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 112,tx element: 112.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 113,tx element: 112.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 114,tx element: 114.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 115,tx element: 114.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 116,tx element: 116.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 117,tx element: 116.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 118,tx element: 118.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 119,tx element: 118.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 120,tx element: 120.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 121,tx element: 120.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 122,tx element: 122.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 123,tx element: 122.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 124,tx element: 124.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 125,tx element: 124.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 126,tx element: 126.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 127,tx element: 126.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 128,tx element: 128.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 129,tx element: 128.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 130,tx element: 130.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 131,tx element: 130.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 132,tx element: 132.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 133,tx element: 132.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 134,tx element: 134.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 135,tx element: 134.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 136,tx element: 136.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 137,tx element: 136.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 138,tx element: 138.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 139,tx element: 138.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 140,tx element: 140.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 141,tx element: 140.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 142,tx element: 142.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 143,tx element: 142.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 144,tx element: 144.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 145,tx element: 144.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 146,tx element: 146.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 147,tx element: 146.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 148,tx element: 148.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 149,tx element: 148.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 150,tx element: 150.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 151,tx element: 150.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 152,tx element: 152.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 153,tx element: 152.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 154,tx element: 154.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 155,tx element: 154.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 156,tx element: 156.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 157,tx element: 156.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 158,tx element: 158.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 159,tx element: 158.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 160,tx element: 160.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 161,tx element: 160.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 162,tx element: 162.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 163,tx element: 162.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 164,tx element: 164.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 165,tx element: 164.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 166,tx element: 166.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 167,tx element: 166.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 168,tx element: 168.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 169,tx element: 168.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 170,tx element: 170.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 171,tx element: 170.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 172,tx element: 172.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 173,tx element: 172.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 174,tx element: 174.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 175,tx element: 174.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 176,tx element: 176.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 177,tx element: 176.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 178,tx element: 178.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 179,tx element: 178.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 180,tx element: 180.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 181,tx element: 180.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 182,tx element: 182.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 183,tx element: 182.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 184,tx element: 184.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 185,tx element: 184.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 186,tx element: 186.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 187,tx element: 186.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 188,tx element: 188.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 189,tx element: 188.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 190,tx element: 190.5,angle: 0 °,duration: 236 µs}
+  - {rx element: 191,tx element: 190.5,angle: 0 °,duration: 236 µs}
+focus:
+  - depth: 75 mm
+    tx frequency: 3.5416666666666665 MHz
+    receive:
+      - {shallowfreq: 5 MHz,deepfreq: 2.5 MHz,filterdepth: 300 mm}
+      - {shallowfreq: 5 MHz,deepfreq: 2.5 MHz,filterdepth: 300 mm}
+      - {shallowfreq: 5 MHz,deepfreq: 2.5 MHz,filterdepth: 300 mm}
+      - {shallowfreq: 5 MHz,deepfreq: 2.5 MHz,filterdepth: 300 mm}
+      - {shallowfreq: 5 MHz,deepfreq: 2.5 MHz,filterdepth: 300 mm}
+      - {shallowfreq: 5 MHz,deepfreq: 2.5 MHz,filterdepth: 300 mm}
+      - {shallowfreq: 5 MHz,deepfreq: 2.5 MHz,filterdepth: 300 mm}
+      - {shallowfreq: 5 MHz,deepfreq: 2.5 MHz,filterdepth: 300 mm}
+rxChannels: 32
+autoGainActive: false

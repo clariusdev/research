@@ -1,9 +1,8 @@
 # Clarius Research Tools
 
-This repository contains scripts and reference code to read and process data collected
-from Clarius scanners, plus documentation for the App's research features. Each folder
-holds a specific project with sample data and MATLAB/Python scripts to read, process, and
-display the data.
+This repository contains scripts and reference code to read, scan convert, and display
+raw data collected from Clarius scanners, sample data, and documentation for the App's
+research features.
 
 Data that can be acquired from Clarius scanners includes:
 
@@ -34,8 +33,9 @@ Data that can be acquired from Clarius scanners includes:
 
 ```
 .
-├── common      shared readers (rdataread.py / rdataread.m)
-├── viewer      runnable examples (python / matlab / jupyter) + sample data
+├── common      shared readers (rdataread.py / rdataread.m) and scan conversion (scanconvert.py)
+├── data        sample captures of a wire phantom: linear (L7HD3) and convex (C3HD3)
+├── viewer      runnable examples (python / matlab / jupyter)
 └── docs        documentation
 ```
 
@@ -48,9 +48,16 @@ cd viewer/python
 python runme.py
 ```
 
-The reader (`common/python/rdataread.py`) exposes `read_rf`, `read_iq`, and `read_env`;
-see [Raw Data Format](docs/raw-data-format.md) for the binary layout and conversion to
-B-mode.
+The reader (`common/python/rdataread.py`) exposes `read_rf`, `read_iq`, and `read_env`,
+and `common/python/scanconvert.py` places a frame in millimetres from the probe geometry
+in its `.yml`. To scan convert a capture of your own to PNGs:
+
+```bash
+python common/python/scanconvert.py path/to/capture_env.raw --frames all
+```
+
+See [Raw Data Format](docs/raw-data-format.md) for the binary layout, conversion to
+B-mode, and scan conversion.
 
 ## Related repositories
 

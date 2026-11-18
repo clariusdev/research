@@ -177,12 +177,17 @@ This repo ships reference readers and runnable examples:
 
 - [`common/python/rdataread.py`](../common/python/rdataread.py) — `read_rf`, `read_iq`,
   `read_env`
+- [`common/python/scanconvert.py`](../common/python/scanconvert.py) — scan conversion
+  to millimetres from the probe geometry in the `.yml`, as a library or from the command
+  line
 - [`common/matlab/rdataread.m`](../common/matlab/rdataread.m) — MATLAB equivalent,
   which picks the format from the header's sample size
 - [`viewer/python/runme.py`](../viewer/python/runme.py),
   [`viewer/matlab/runme.m`](../viewer/matlab/runme.m),
   [`viewer/jupyter/runme.ipynb`](../viewer/jupyter/runme.ipynb) — load and display the
-  bundled sample data in [`viewer/data`](../viewer/data)
+  sample data in [`data`](../data): a wire phantom imaged with a linear array
+  (L7HD3, `data/linear`) and a convex array (C3HD3, `data/convex`), each with the App's
+  image of the same capture
 
 ### Python: read and convert to B
 
@@ -195,20 +200,50 @@ from scipy.signal import hilbert
 import rdataread as rd
 
 # RF -> B (envelope detection + log compression)
-hdr, timestamps, data = rd.read_rf("phantom_rf.raw")
+hdr, timestamps, data = rd.read_rf("data/convex/convex_rf.raw")
 b = 20 * np.log10(np.abs(1 + hilbert(data[:, :, 0])))
 
 # IQ -> B (magnitude + log compression)
-hdr, timestamps, data = rd.read_iq("phantom_iq.raw")
+hdr, timestamps, data = rd.read_iq("data/convex/convex_iq.raw")
 i, q = data[:, 0::2, :], data[:, 1::2, :]
 b = 10 * np.log10(1 + i[:, :, 0] ** 2 + q[:, :, 0] ** 2)
 
 # Envelope is already 8-bit B data
-hdr, timestamps, data = rd.read_env("phantom_env.raw")
+hdr, timestamps, data = rd.read_env("data/convex/convex_env.raw")
 ```
 
 See [`viewer/python/runme.py`](../viewer/python/runme.py) for the full display pipeline
-(RF, IQ, and envelope frames side by side).
+(RF, IQ, and envelope frames side by side, before and after scan conversion).
 
-> Remember the data is in ultrasound (polar/array) coordinates — scan conversion to pixel
-> space is up to you and depends on the probe geometry reported in the `.yml`.
+### Python: scan convert
+
+The data is in ultrasound coordinates: lines across, samples down. Scan conversion places
+each sample in millimetres from the probe geometry: each line starts at its `rx element`
+and runs at its `angle`, a sample's depth is `(delay samples + sample) / sampling rate ×
+c / 2`, and a curved array's elements lie on an arc of the probe's `radius`. Depth is
+measured from the lens face, as on the App's depth scale, so the probe's `lens thickness`
+is taken off.
+
+```python
+import scanconvert as sc
+
+meta, hdr, data = sc.load("data/convex/convex_rf.raw")      # reads the .yml beside it
+convert = sc.converter(meta, hdr["samples"], pixel_mm=0.1)  # geometry from the .yml probe block
+b = sc.bmode(meta["type"], data[:, :, 0])                   # RF/IQ log compressed, envelope as is
+image = convert(b)                                          # extent in mm: convert.extent_mm
+```
+
+`bmode` removes each line's DC offset from RF (and from I and Q) before detection, then
+shows 50 dB with the median speckle at a low grey, so the image does not brighten or dim
+with its strongest reflector; `dynamic_range` sets the width, and `anchor="peak"` runs the
+range down from the brightest 0.1% instead.
+
+From the command line it writes a PNG per frame:
+
+```bash
+python common/python/scanconvert.py data/convex/convex_env.raw --frames all
+```
+
+Files from before 13.1 have no probe block; give the geometry with `--elements`, `--pitch`
+(µm) and `--radius` (mm, curved arrays only), or pass the same to `converter`. Scanners
+from the first generation (V1) number their elements right to left (`--flip`).

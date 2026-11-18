@@ -1,84 +1,62 @@
-"""Read data from the selected folder
+"""Load and display the bundled Clarius raw data.
 
-This script will load and display Clarius supported file types.
+For each sample capture (a linear and a convex array) and each data type it holds (RF, IQ, envelope), shows the
+first frame as recorded, in lines and samples, next to the same frame scan converted to millimetres.
 
-Note: code is tested on mac, for other operating systems you may need to
-use (\) instead of (/) for relative path. 
-
-Author: Reza Zahiri
-
+Needs numpy and matplotlib.
 """
 
-import numpy as np
-from scipy.signal import hilbert
-import matplotlib.pyplot as plt
+import os
 import sys
-libPath = "../../common/python"
-if not libPath in sys.path: sys.path.append(libPath)
-import rdataread as rd
 
-if __name__ == '__main__':
-    
-    # read rf data
-    path = "../data/wirephantom/"
-    filename = "phantom_rf.raw"
-    hdr, timestamps, data = rd.read_rf(path + filename)
-    numframes = 1 #hdr['frames']
-    
-    # covnert to B 
-    bdata = np.zeros((hdr['lines'], hdr['samples'], hdr['frames']), dtype='float')
-    for frame in range(numframes):
-        bdata[:,:,frame] = 20 * np.log10( np.abs(1 + hilbert(data[:,:,frame])) )
-    
-    # display images
-    for frame in range(numframes):
-        plt.figure(figsize=(10,5))
-        plt.subplot(1,2,1)
-        plt.imshow(np.transpose(data[:,:,frame]), cmap=plt.cm.plasma, aspect='auto', vmin=-1000, vmax=1000 )
-        plt.title('RF frame ' + str(frame))
-        plt.subplot(1,2,2)
-        plt.imshow(np.transpose(bdata[:,:,frame]), cmap=plt.cm.gray, aspect='auto', vmin=15, vmax=70 )
-        plt.title('sample B frame ' + str(frame))
-        plt.show()    
-    
-    # read iq data
-    path = "../data/wirephantom/"
-    filename = "phantom_iq.raw"
-    hdr, timestamps, data = rd.read_iq(path + filename)
-    # separating i and q data
-    idata = data[:,0::2,:]
-    qdata = data[:,1::2,:]    
- 
-    # covnert IQ to B 
-    numframes = 1 #hdr['frames']
-    bdata = np.zeros((hdr['lines'], hdr['samples'], hdr['frames']), dtype='float')
-    for frame in range(numframes):
-        bdata[:,:,frame] = 10 * np.log10(1 + np.power(idata[:,:,frame], 2) + np.power( qdata[:,:,frame], 2)  )
-    
-    # display images
-    for frame in range(numframes):
-        plt.figure(figsize=(15,5))
-        plt.subplot(1,3,1)
-        plt.imshow(np.transpose(idata[:,:,frame]), cmap=plt.cm.viridis, aspect='auto', vmin=-100, vmax=100 )
-        plt.title('I frame ' + str(frame))
-        plt.subplot(1,3,2)
-        plt.imshow(np.transpose(qdata[:,:,frame]), cmap=plt.cm.viridis, aspect='auto', vmin=-100, vmax=100 )
-        plt.title('Q frame ' + str(frame))
-        plt.subplot(1,3,3)
-        plt.imshow(np.transpose(bdata[:,:,frame]), cmap=plt.cm.gray, aspect='auto', vmin=15, vmax=70 )
-        plt.title('sample B frame ' + str(frame))
-        plt.show()
-    
-    # read b/envelope data
-    path = "../data/wirephantom/"
-    filename = "phantom_env.raw"
-    hdr, timestamps, data = rd.read_env(path + filename)
+import matplotlib.pyplot as plt
+import numpy as np
 
-    # display b data
-    numframes = 1 #hdr['frames']
-    for frame in range(numframes):
-        plt.figure(figsize=(5,5))
-        plt.imshow(np.transpose(data[:,:,frame]), cmap=plt.cm.gray, aspect='auto', vmin=0, vmax=255 )
-        plt.title('envelope frame ' + str(frame))
-        plt.show()   
-    
+here = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(here, "..", "..", "common", "python"))
+import scanconvert as sc  # noqa: E402
+
+DATA = os.path.join(here, "..", "..", "data")
+CAPTURES = ("linear", "convex")
+TYPES = ("rf", "iq", "env")
+
+
+def show(name, kind, path, frame=0):
+    meta, hdr, data = sc.load(path)
+    lines = data[:, :, frame]
+    b = sc.bmode(meta["type"], lines)
+    convert = sc.converter(meta, hdr["samples"])
+
+    panels = 3 if kind in ("rf", "iq") else 2
+    fig, axes = plt.subplots(1, panels, figsize=(5 * panels, 5))
+    fig.suptitle(f"{name} {kind}, frame {frame}: {convert.description}")
+    if kind == "rf":
+        limit = np.percentile(np.abs(lines), 99)
+        axes[0].imshow(lines.T, cmap="seismic", aspect="auto", vmin=-limit, vmax=limit)
+        axes[0].set_title("RF")
+    elif kind == "iq":
+        magnitude = np.hypot(lines[:, 0::2], lines[:, 1::2])
+        axes[0].imshow(magnitude.T, cmap="viridis", aspect="auto", vmax=np.percentile(magnitude, 99))
+        axes[0].set_title("IQ magnitude")
+    if kind in ("rf", "iq"):
+        axes[0].set_xlabel("line")
+        axes[0].set_ylabel("sample")
+    axes[-2].imshow(b.T, cmap="gray", aspect="auto", vmin=0, vmax=255)
+    axes[-2].set_title("B, pre-scan")
+    axes[-2].set_xlabel("line")
+    axes[-2].set_ylabel("sample")
+    axes[-1].imshow(convert(b), cmap="gray", vmin=0, vmax=255, extent=convert.extent_mm)
+    axes[-1].set_title("B, scan converted")
+    axes[-1].set_xlabel("mm")
+    axes[-1].set_ylabel("depth (mm)")
+    axes[-1].set_facecolor("black")
+    fig.tight_layout()
+
+
+if __name__ == "__main__":
+    for name in CAPTURES:
+        for kind in TYPES:
+            path = os.path.join(DATA, name, f"{name}_{kind}.raw")
+            if os.path.exists(path):
+                show(name, kind, path)
+    plt.show()
