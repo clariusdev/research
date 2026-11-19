@@ -64,11 +64,30 @@ internal sequencing knob, and ranges vary by probe and preset.
 | `rxFreqShallow` | Start demodulation frequency (MHz). |
 | `rxFreqDeep` | End demodulation frequency (MHz). |
 | `speedOfSound` | Speed-of-sound correction (m/s). |
-| `rfDecimation` | Decimation factor used for IQ data. |
+| `iqDecimation` | Decimation factor used for IQ data. |
 | `envDecimation` | Decimation factor used for envelope/grayscale data. |
-| `rfDecim` | Decimation factor of the RF signal acquisition. |
 | `dyn` | Dynamic range (dB). |
 | `nf` | Noise floor (dB). |
+
+### RF
+
+These apply to the RF stream (the QUS preset, or RF in the Research preset).
+
+| Parameter | Meaning |
+|-----------|---------|
+| `rfTxFreq` ** | RF transmit frequency (MHz). |
+| `rfFocus` ** | RF transmit focus depth (cm). |
+| `rfTgc` | RF analog gain (dB), flat at all depths. Default 20 dB; the usable range is 5–40 dB, and values outside it act as the nearest limit. The App's TGC sliders, Gain and auto gain do not affect RF. |
+| `rfDecimation` | RF decimation factor. The sampling rate is the probe's receive clock divided by this (60 MHz on HD3), and is reported as `sampling rate` in each capture's `_rf.yml`. The presets choose it from imaging depth and skip 2, which shows a small artefact on every sample. |
+
+A change to `rfTgc` takes effect within a frame or two without interrupting imaging. A
+change to `rfFocus`, `rfTxFreq` or `rfDecimation` reloads the acquisition, so imaging
+pauses briefly.
+
+`rfFocus` and `rfDecimation` are calculated from the imaging depth by the presets. A value
+you set overrides that calculation until one of its inputs changes, such as the imaging
+depth, so set them again after a depth change. In the Breast preset the RF focus follows
+the RF depth range and cannot currently be held at another value.
 
 ### Color / Power Doppler
 

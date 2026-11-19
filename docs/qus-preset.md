@@ -45,6 +45,8 @@ These apply on every supported probe:
 
 What still changes with **imaging depth**: transmit focus, RF sampling rate (below), and on some linear probes the anti-alias filter (per-probe table). Keep the imaging depth fixed between reference and sample acquisitions.
 
+The RF gain, focus, transmit frequency and decimation can be set through the Cast API or the Solum SDK; see the RF section of [Low-Level Parameters](low-level-parameters.md#rf).
+
 ---
 
 ## Per-probe settings (HD3 probes)
