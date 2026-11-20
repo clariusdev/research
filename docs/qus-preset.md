@@ -45,6 +45,8 @@ These apply on every supported probe:
 
 What still changes with **imaging depth**: transmit focus, RF sampling rate (below), and on some linear probes the anti-alias filter (per-probe table). Keep the imaging depth fixed between reference and sample acquisitions.
 
+> **Which transmit frequency is in the capture files:** the `transmit frequency` in `_rf.yml` is the fixed RF transmit frequency above. The same field in `_env.yml` and `_iq.yml` is the **B-mode** transmit frequency, which slides with imaging depth on most probes. A different value there does not mean the RF transmit changed.
+
 The RF gain, focus, transmit frequency and decimation can be set through the Cast API or the Solum SDK; see the RF section of [Low-Level Parameters](low-level-parameters.md#rf).
 
 ---
