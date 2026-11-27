@@ -77,8 +77,17 @@ These apply to the RF stream (the QUS preset, or RF in the Research preset).
 |-----------|---------|
 | `rfTxFreq` ** | RF transmit frequency (MHz). |
 | `rfFocus` ** | RF transmit focus depth (cm). |
-| `rfTgc` | RF analog gain (dB), flat at all depths. Default 20 dB; the usable range is 5–40 dB, and values outside it act as the nearest limit. The App's TGC sliders, Gain and auto gain do not affect RF. |
+| `rfTgc` | RF analog gain (dB) at the skin line. Default 20 dB. The App's TGC sliders, Gain and auto gain do not affect RF. |
+| `rfTgcSlope` | Rise in RF analog gain with depth (dB/cm), from `rfTgc` at the skin line to `rfTgcSlopeDepth`, then held. Default 0 (flat). |
+| `rfTgcSlopeDepth` | Depth where the `rfTgcSlope` ramp stops (cm). Default 10 cm. |
 | `rfDecimation` | RF decimation factor. The sampling rate is the probe's receive clock divided by this (60 MHz on HD3), and is reported as `sampling rate` in each capture's `_rf.yml`. The presets choose it from imaging depth and skip 2, which shows a small artefact on every sample. |
+
+The analog gain the hardware can apply is 5–40 dB on HD and HD3 probes. Gain requested
+outside that range, at any depth, is applied as the nearest limit. For example, `rfTgc` 15
+with `rfTgcSlope` 4 asks for 55 dB at 10 cm, but the gain stops rising at 40 dB, from
+6.25 cm down. The `tgc:` curve in each capture's `_rf.yml` records the gain as applied, with
+a point added where it reaches a limit. Captures from earlier software record the gain as
+requested, so clip their curves to 5–40 dB before using them.
 
 A change to `rfTgc` takes effect within a frame or two without interrupting imaging. A
 change to `rfFocus`, `rfTxFreq` or `rfDecimation` reloads the acquisition, so imaging

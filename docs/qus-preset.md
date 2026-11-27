@@ -36,7 +36,7 @@ These apply on every supported probe:
 | Receive F-number | 1 (dynamic aperture) | |
 | Receive apodization | Hamming | |
 | RF lines | One per element | Spans the full B-mode field of view; there is no RF ROI |
-| Analog TGC | **Flat 20 dB** at all depths | |
+| Analog TGC | **Flat 20 dB** at all depths | Default; a slope with depth can be set, limited to 5–40 dB (see [Low-Level Parameters](low-level-parameters.md#rf)) |
 | Digital TGC on RF | 0 dB | |
 | TGC sliders, Gain, auto gain | Do not affect RF | Auto gain is off by default; Gain and the sliders act only on B-mode display |
 | Speed of sound | **1540 m/s** | No speed-of-sound option in this preset |
